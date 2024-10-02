@@ -1,0 +1,27 @@
+@startuml
+!theme blueprint
+
+interface HTTP
+component "Spring Boot" <<OpenTelemetry>> as springBoot
+component "Spring Boot Client" <<MicroMeter>> as springBootClient
+component "OpenTelemetry Collector" as otelCollector
+database "Prometheus Database" as prometheus <<Time Series>>
+component "Grafana Dashboard" as grafana
+component "Zipkin" as jaeger
+database "Grafana Loki" as loki
+
+database "H2 Database" as books <<RDBMS>>
+
+HTTP .right. springBootClient
+springBoot -down-> books : jdbc
+springBootClient <-right-> springBoot : REST
+
+springBoot -down-> otelCollector : OTLP
+springBootClient -down-> otelCollector : OTLP
+
+otelCollector -down-> prometheus : <<pull prometheus>> /metrics
+otelCollector -down-> jaeger : OTLP
+otelCollector -down-> loki : otlphttp
+grafana <-up-> prometheus : HTTP
+grafana <-up-> loki : HTTP
+@enduml
