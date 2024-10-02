@@ -1,0 +1,47 @@
+version: '3'
+services:
+  otel:
+    container_name: otel
+    image: otel/opentelemetry-collector-contrib:latest
+    command: [--config=/etc/otel-config.yml]
+    volumes:
+      - ./otel-config.yml:/etc/otel-config.yml
+    ports:
+      - "4318:4318"
+      - "4317:4317"
+      - "55679:55679"
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus
+    command: [--config.file=/etc/prometheus/prometheus.yml]
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9091:9090"
+# grafana
+  grafana:
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+    container_name: grafana
+    image: grafana/grafana
+    volumes:
+      - ./grafana.yml:/etc/grafana/provisioning/datasources/default.yml
+    ports:
+      - "3000:3000"
+#loki
+  loki:
+    image: grafana/loki:3.2.0
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    #volumes:
+    #  - ./loki-local-config.yaml:/etc/grafana/provisioning/datasources/default.yml
+# zipkin
+  zipkin:
+    container_name: zipkin
+    image: ghcr.io/openzipkin/zipkin-slim:${TAG:-latest}
+    environment:
+      - STORAGE_TYPE=mem
+    ports:
+      - "9411:9411"
