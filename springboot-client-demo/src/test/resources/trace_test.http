@@ -1,0 +1,33 @@
+POST {{base}}/books
+Content-Type: application/json
+
+{
+  "author": "Miguel Angel Asturias",
+  "title": "El señor presidente",
+  "isbn": "978-84-376-0494-7",
+  "publisher": "Editorial planeta"
+}
+
+###
+PUT {{base}}/books/1
+Content-Type: application/json
+
+{
+  "bookId": 1,
+  "author": "Miguel Angel Asturias",
+  "title": "El señor presidente",
+  "isbn": "978-84-376-0494-7",
+  "publisher": "Editorial universo"
+}
+
+###
+DELETE {{base}}/books/1
+Content-Type: application/json
+
+###
+GET {{base}}/books
+Accept: application/json
+
+###
+GET {{base}}/books/1
+Accept: application/json

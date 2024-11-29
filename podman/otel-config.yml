@@ -11,11 +11,12 @@ exporters:
   debug:
   prometheus:
     endpoint: "0.0.0.0:8889"
-  zipkin:
-    endpoint: "http://zipkin:9411/api/v2/spans"
-    format: proto
   otlphttp:
     endpoint: http://loki:3100/otlp
+  otlp:
+    endpoint: tempo:4317
+    tls:
+      insecure: true
 service:
   extensions: [zpages]
   pipelines:
@@ -25,7 +26,7 @@ service:
       exporters: [debug,prometheus]
     traces:
       receivers: [otlp]
-      exporters: [debug, zipkin]
+      exporters: [debug, otlp]
     logs:
       receivers: [otlp]
       exporters: [debug, otlphttp]
