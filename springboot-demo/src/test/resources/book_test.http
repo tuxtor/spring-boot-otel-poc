@@ -29,5 +29,5 @@ GET {{base}}/books
 Accept: application/json
 
 ###
-GET {{base}}/books/2
+GET {{base}}/books/1
 Accept: application/json

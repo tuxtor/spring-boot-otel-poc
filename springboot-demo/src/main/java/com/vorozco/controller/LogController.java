@@ -14,11 +14,11 @@ public class LogController {
 
     @GetMapping
     public String doLog() {
-        logger.trace("Nivel granular");
-        logger.debug("Nivel desarrollo");
-        logger.info("Nivel info");
-        logger.warn("Nivel advertencia");
-        logger.error("Nivel error");
-        return "Los logs han sido generados";
+        logger.trace("Trace level");
+        logger.debug("Debug level");
+        logger.info("Info level");
+        logger.warn("Warn level");
+        logger.error("Error level");
+        return "Logs have been generated";
     }
 }

@@ -7,8 +7,8 @@ component "Spring Boot Client" <<MicroMeter>> as springBootClient
 component "OpenTelemetry Collector" as otelCollector
 database "Prometheus Database" as prometheus <<Time Series>>
 component "Grafana Dashboard" as grafana
-component "Zipkin" as jaeger
-database "Grafana Loki" as loki
+database "Tempo" as tempo
+database "Loki" as loki
 
 database "H2 Database" as books <<RDBMS>>
 
@@ -20,8 +20,9 @@ springBoot -down-> otelCollector : OTLP
 springBootClient -down-> otelCollector : OTLP
 
 otelCollector -down-> prometheus : <<pull prometheus>> /metrics
-otelCollector -down-> jaeger : OTLP
+otelCollector -down-> tempo : OTLP
 otelCollector -down-> loki : otlphttp
 grafana <-up-> prometheus : HTTP
 grafana <-up-> loki : HTTP
+grafana <-up-> tempo : HTTP
 @enduml

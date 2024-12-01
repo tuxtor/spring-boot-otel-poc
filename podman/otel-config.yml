@@ -6,7 +6,11 @@ receivers:
       http:
         endpoint: 0.0.0.0:4318
 processors:
-
+  attributes:
+    actions:
+      - key: team
+        action: insert
+        value: vorozco
 exporters:
   debug:
   prometheus:
@@ -22,7 +26,7 @@ service:
   pipelines:
     metrics:
       receivers: [otlp]
-      processors: []
+      processors: [attributes]
       exporters: [debug,prometheus]
     traces:
       receivers: [otlp]
