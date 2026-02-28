@@ -63,7 +63,7 @@ springboot-client-demo (8081) ──OpenFeign──► springboot-demo (8080)
 
 ### Two Different OTel Integration Approaches
 The two services intentionally use different OTel integration strategies:
-- `springboot-demo` → `opentelemetry-spring-boot-starter` (OTel SDK BOM `2.20.1`), configured via `otel.*` properties
+- `springboot-demo` → `opentelemetry-spring-boot-starter` (OpenTelemetry instrumentation BOM `2.25.0`), configured via `otel.*` properties
 - `springboot-client-demo` → `micrometer-tracing-bridge-otel` + `micrometer-registry-otlp`, configured via `management.otlp.*` and `management.tracing.*` properties
 
 Do not mix these patterns within a single module.
