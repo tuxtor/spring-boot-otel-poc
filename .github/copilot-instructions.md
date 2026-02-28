@@ -2,7 +2,7 @@
 
 ## Repository Overview
 
-This is a proof-of-concept demonstrating OpenTelemetry (OTel) observability with two independent Spring Boot 3.5.6 / Java 21 microservices. Each module is a self-contained Maven project — there is no parent POM.
+This is a proof-of-concept demonstrating OpenTelemetry (OTel) observability with two independent Spring Boot 3.5.9 / Java 21 microservices. Each module is a self-contained Maven project — there is no parent POM.
 
 ## Build & Run Commands
 
