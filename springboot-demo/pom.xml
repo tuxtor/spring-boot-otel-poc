@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.16</version>
+		<version>4.1.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.vorozco</groupId>
@@ -14,7 +14,7 @@
 	<name>springboot-demo</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>21</java.version>
+		<java.version>25</java.version>
 		<repackage.classifier/>
 		<!--spring-native.version>0.11.5</spring-native.version-->
 	</properties>
@@ -36,7 +36,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter-webmvc</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -59,7 +59,24 @@
 	</dependencies>
 
 	<build>
-		<plugins>
+    <plugins>
+      <plugin>
+        <groupId>org.openrewrite.maven</groupId>
+        <artifactId>rewrite-maven-plugin</artifactId>
+        <version>6.53.0</version>
+        <configuration>
+          <activeRecipes>
+            <recipe>org.openrewrite.java.spring.boot4.UpgradeSpringBoot_4_0</recipe>
+          </activeRecipes>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.openrewrite.recipe</groupId>
+            <artifactId>rewrite-spring</artifactId>
+            <version>6.37.1</version>
+          </dependency>
+        </dependencies>
+      </plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -82,7 +99,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin-->
+			</plugin>
 			<plugin>
 				<groupId>org.hibernate.orm.tooling</groupId>
 				<artifactId>hibernate-enhance-maven-plugin</artifactId>
@@ -102,7 +119,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin-->
 		</plugins>
 	</build>
 	<repositories>
@@ -113,7 +130,11 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-		</repository>
+    </repository>
+    <repository>
+      <id>codegenome</id>
+      <url>https://artifacts.codegenomeproject.org/maven</url>
+    </repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
@@ -123,7 +144,11 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-		</pluginRepository>
+    </pluginRepository>
+    <pluginRepository>
+      <id>codegenome</id>
+      <url>https://artifacts.codegenomeproject.org/maven</url>
+    </pluginRepository>
 	</pluginRepositories>
 
 	<!--profiles>

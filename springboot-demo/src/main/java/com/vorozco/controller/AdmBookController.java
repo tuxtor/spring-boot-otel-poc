@@ -4,7 +4,6 @@ import com.vorozco.model.AdmBook;
 import com.vorozco.repository.AdmBookRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +16,6 @@ public class AdmBookController {
 
     Logger logger = LoggerFactory.getLogger(AdmBookController.class);
 
-    @Autowired
     public AdmBookController(AdmBookRepository admBookRepository) {
         this.admBookRepository = admBookRepository;
     }
